@@ -4,19 +4,20 @@ import homeRouter from './src/routes/HomeRoutes.js';
 
 dotenv.config();
 
-class App{
-  constructor(){
+class App {
+  constructor() {
     this.app = express();
     this.middleware();
     this.routes();
   }
 
-  middleware(){
+  middleware() {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.set('port', process.env.PORT);
   }
-  routes(){
+
+  routes() {
     this.app.use('/', homeRouter);
   }
 }
