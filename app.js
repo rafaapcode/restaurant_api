@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import homeRouter from './src/routes/HomeRoutes.js';
+import restaurantRouter from './src/routes/RestaurantRoutes.js';
 
 dotenv.config();
 
@@ -18,7 +18,7 @@ class App {
   }
 
   routes() {
-    this.app.use('/', homeRouter);
+    this.app.use('/restaurant', restaurantRouter);
   }
 }
 

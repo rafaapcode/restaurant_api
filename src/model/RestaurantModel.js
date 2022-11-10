@@ -59,9 +59,9 @@ export default class Restaurant {
         return { status: false, statusCode: 400, message: 'Restaurant already exists.' };
       }
 
-      const restaurant = await prisma.restaurant.create({ data: { name, address, hour } });
+      await prisma.restaurant.create({ data: { name, address, hour } });
 
-      return { status: true, statusCode: 201, data: restaurant };
+      return { status: true, statusCode: 201, message: 'Restaurant Created' };
     } catch (error) {
       return { status: false, statusCode: 500, message: error.message };
     }
@@ -102,7 +102,7 @@ export default class Restaurant {
         data: body,
       });
 
-      return { status: true, statusCode: 200, message: 'Restaurant updated with successfull !!' };
+      return { status: true, statusCode: 200, message: 'Restaurant updated with successfull!!' };
     } catch (error) {
       return { status: false, statusCode: 500, message: error.message };
     }
