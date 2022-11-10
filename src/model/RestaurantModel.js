@@ -2,37 +2,18 @@ import prisma from '../prisma/client';
 import validation from '../service/DataRestaurantValidations';
 
 export default class Restaurant {
-  static async get(name) {
+  static async get(id) {
     try {
       const restaurant = await prisma.restaurant.findUniqueOrThrow({
-        where: { name },
+        where: { id },
         include: {
           photo_restaurant: { select: { filename: true, url: true } },
           product: {
-            include: {
-              category: {
-                select: {
-                  name: true,
-                },
-              },
-              photo_product: {
-                select: {
-                  url: true,
-                  filename: true,
-                },
-              },
-              promo: {
-                select: {
-                  newPrice: true,
-                  hours: true,
-                  description: true,
-                },
-              },
-            },
             select: {
               name: true,
               price: true,
               promotion: true,
+              category: true,
             },
           },
         },
@@ -53,9 +34,9 @@ export default class Restaurant {
       }
       const { name, address, hour } = body;
 
-      const { status } = await Restaurant.get(name);
+      const restaurant = await prisma.restaurant.findUnique({ where: { name } });
 
-      if (status) {
+      if (restaurant) {
         return { status: false, statusCode: 400, message: 'Restaurant already exists.' };
       }
 
@@ -71,6 +52,7 @@ export default class Restaurant {
     try {
       const restaurants = await prisma.restaurant.findMany({
         select: {
+          id: true,
           name: true,
           address: true,
           hour: true,
@@ -83,7 +65,7 @@ export default class Restaurant {
     }
   }
 
-  static async update(name, body) {
+  static async update(id, body) {
     try {
       const { error } = validation.restaurantBodyUpdate(body);
 
@@ -91,14 +73,14 @@ export default class Restaurant {
         return { status: false, statusCode: 400, message: error.message };
       }
 
-      const { status } = await Restaurant.get(name);
+      const { status } = await Restaurant.get(id);
 
       if (!status) {
         return { status: false, statusCode: 404, message: 'Restaurant not found.' };
       }
 
       await prisma.restaurant.update({
-        where: { name },
+        where: { id },
         data: body,
       });
 
@@ -108,16 +90,16 @@ export default class Restaurant {
     }
   }
 
-  static async delete(name) {
+  static async delete(id) {
     try {
-      const { status } = await Restaurant.get(name);
+      const { status } = await Restaurant.get(id);
 
       if (!status) {
         return { status: false, statusCode: 404, message: 'Restaurant not found.' };
       }
 
       await prisma.restaurant.delete({
-        where: { name },
+        where: { id },
       });
 
       return { status: true, statusCode: 200, message: 'Restaurant deleted with successfull !!' };

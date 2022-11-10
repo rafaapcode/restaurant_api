@@ -17,9 +17,9 @@ export default class RestaurantController {
 
   static async get(req, res) {
     try {
-      const { name } = req.params;
+      const { id } = req.params;
 
-      const restaurant = await Restaurant.get(name);
+      const restaurant = await Restaurant.get(id);
 
       if (restaurant.status) {
         return res.status(restaurant.statusCode).json(restaurant.data);
@@ -47,8 +47,8 @@ export default class RestaurantController {
 
   static async update(req, res) {
     try {
-      const { name } = req.params;
-      const newRestaurant = await Restaurant.update(name, req.body);
+      const { id } = req.params;
+      const newRestaurant = await Restaurant.update(id, req.body);
 
       if (!newRestaurant.status) {
         return res.status(newRestaurant.statusCode).json({ message: newRestaurant.message });
@@ -62,8 +62,8 @@ export default class RestaurantController {
 
   static async delete(req, res) {
     try {
-      const { name } = req.params;
-      const deleted = await Restaurant.delete(name);
+      const { id } = req.params;
+      const deleted = await Restaurant.delete(id);
 
       if (!deleted.status) {
         return res.status(deleted.statusCode).json({ message: deleted.message });
