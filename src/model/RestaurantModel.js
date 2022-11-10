@@ -1,5 +1,5 @@
 import prisma from '../prisma/client';
-import validation from '../service/DataValidations.js';
+import validation from '../service/DataRestaurantValidations';
 
 export default class Restaurant {
   static async get(name) {
