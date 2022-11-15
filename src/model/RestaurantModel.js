@@ -1,5 +1,4 @@
 import prisma from '../prisma/client';
-import validation from '../service/DataRestaurantValidations';
 
 export default class Restaurant {
   static async get(id) {
@@ -27,11 +26,6 @@ export default class Restaurant {
 
   static async create(body) {
     try {
-      const { error } = validation.restaurantBody(body);
-
-      if (error) {
-        return { status: false, statusCode: 400, message: error.message };
-      }
       const { name, address, hour } = body;
 
       const restaurant = await prisma.restaurant.findUnique({ where: { name } });
@@ -67,12 +61,6 @@ export default class Restaurant {
 
   static async update(id, body) {
     try {
-      const { error } = validation.restaurantBodyUpdate(body);
-
-      if (error) {
-        return { status: false, statusCode: 400, message: error.message };
-      }
-
       const { status } = await Restaurant.get(id);
 
       if (!status) {
