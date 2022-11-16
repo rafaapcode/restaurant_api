@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import restaurantRouter from './src/routes/RestaurantRoutes.js';
 import productsRouter from './src/routes/ProductsRoutes.js';
+import categoryRouter from './src/routes/CategoryRoutes';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ class App {
   routes() {
     this.app.use('/restaurant', restaurantRouter);
     this.app.use('/products', productsRouter);
+    this.app.use('/category', categoryRouter);
   }
 }
 

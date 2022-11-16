@@ -1,14 +1,6 @@
 import joi from 'joi';
 
 class Validations {
-  categoryBody(data) {
-    const schema = joi.object({
-      name: joi.string().min(7).required(),
-    });
-
-    return schema.validate(data);
-  }
-
   promotionBody(data) {
     const schema = joi.object({
       newPrice: joi.number().required(),
