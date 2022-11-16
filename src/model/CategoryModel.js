@@ -5,10 +5,6 @@ export default class Category {
     try {
       const category = await prisma.category.findUniqueOrThrow({
         where: { name },
-        select: {
-          id: true,
-          name: true,
-        },
         include: {
           product: {
             select: {
@@ -20,7 +16,7 @@ export default class Category {
 
       return { status: true, statusCode: 200, data: category };
     } catch (error) {
-      return { status: false, statusCode: 404, message: 'Category not found.' };
+      return { status: false, statusCode: 404, message: error.message };
     }
   }
 

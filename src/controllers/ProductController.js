@@ -10,7 +10,15 @@ export default class ProductController {
         return res.status(product.statusCode).json({ message: product.message });
       }
 
-      return res.status(product.statusCode).json({ data: product.data });
+      const {
+        id: idProduct, name, price, promotion, category, restaurant,
+      } = product.data;
+
+      return res.status(product.statusCode).json({
+        data: {
+          idProduct, name, price, promotion, category, restaurant,
+        },
+      });
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }

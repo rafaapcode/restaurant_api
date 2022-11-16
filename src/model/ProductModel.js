@@ -5,11 +5,6 @@ export default class Product {
     try {
       const product = await prisma.product.findUniqueOrThrow({
         where: { id },
-        select: {
-          id: true,
-          name: true,
-          price: true,
-        },
         include: {
           category: {
             select: {
@@ -42,13 +37,13 @@ export default class Product {
         return { status: false, statusCode: 400, message: 'Product already exists.' };
       }
 
-      await prisma.product.create({
+      const productCreated = await prisma.product.create({
         data: {
           name, price, categoryId, restaurantId, promotion,
         },
       });
 
-      return { status: true, statusCode: 201, message: 'Product Created' };
+      return { status: true, statusCode: 201, message: `Product Created with ID: ${productCreated.id}` };
     } catch (error) {
       return { status: false, statusCode: 500, message: error.message };
     }
