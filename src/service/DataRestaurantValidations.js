@@ -9,18 +9,6 @@ class Validations {
     return schema.validate(data);
   }
 
-  productBody(data) {
-    const schema = joi.object({
-      name: joi.string().min(7).required(),
-      price: joi.number().required(),
-      categoryId: joi.string().uuid().required(),
-      restaurantId: joi.string().uuid().required(),
-      promotion: joi.boolean().required(),
-    });
-
-    return schema.validate(data);
-  }
-
   promotionBody(data) {
     const schema = joi.object({
       newPrice: joi.number().required(),
