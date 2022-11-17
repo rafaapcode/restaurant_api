@@ -1,8 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import restaurantRouter from './src/routes/RestaurantRoutes.js';
-import productsRouter from './src/routes/ProductsRoutes.js';
+import restaurantRouter from './src/routes/RestaurantRoutes';
+import productsRouter from './src/routes/ProductsRoutes';
 import categoryRouter from './src/routes/CategoryRoutes';
+import promotionRouter from './src/routes/PromotionRoutes';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ class App {
     this.app.use('/restaurant', restaurantRouter);
     this.app.use('/products', productsRouter);
     this.app.use('/category', categoryRouter);
+    this.app.use('/promotion', promotionRouter);
   }
 }
 

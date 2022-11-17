@@ -12,7 +12,22 @@ export default class Restaurant {
               name: true,
               price: true,
               promotion: true,
-              category: true,
+              category: {
+                select: { name: true },
+              },
+              promo: {
+                select: {
+                  newPrice: true,
+                  hours: true,
+                  description: true,
+                },
+              },
+              photo_product: {
+                select: {
+                  filename: true,
+                  url: true,
+                },
+              },
             },
           },
         },
