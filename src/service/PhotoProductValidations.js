@@ -1,9 +1,9 @@
 import joi from 'joi';
 
-class Validations {
+class PhotoProductValidations {
   fotoProductBody(data) {
     const schema = joi.object({
-      url: joi.string(5).required(),
+      url: joi.string().uri().required(),
       filename: joi.string().required(),
       productPhotoId: joi.string().uuid().required(),
     });
@@ -11,15 +11,15 @@ class Validations {
     return schema.validate(data);
   }
 
-  fotoRestaurantBody(data) {
+  fotoProductBodyUpdate(data) {
     const schema = joi.object({
-      url: joi.string(5).required(),
-      filename: joi.string().required(),
-      restaurantPhotoId: joi.string().uuid().required(),
+      url: joi.string().uri(),
+      filename: joi.string(),
+      productPhotoId: joi.string().uuid(),
     });
 
     return schema.validate(data);
   }
 }
 
-export default new Validations();
+export default new PhotoProductValidations();
