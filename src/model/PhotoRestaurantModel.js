@@ -8,7 +8,7 @@ export default class PhotoRestaurant {
       });
 
       if (!photo) {
-        return { status: false, statusCode: 4040, message: 'Photo not found' };
+        return { status: false, statusCode: 404, message: 'Photo not found' };
       }
 
       await prisma.foto_restaurant.update({

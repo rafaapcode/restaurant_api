@@ -5,7 +5,7 @@ import PhotoRestaurantController from '../controllers/PhotoRestaurantController'
 const photoRestaurantRouter = new Router();
 
 photoRestaurantRouter.put('/:id', PhotoValidation.createValidationDataRestaurantUpdate, PhotoRestaurantController.update);
-photoRestaurantRouter.post('/', PhotoValidation.createValidationDataProduct, PhotoRestaurantController.create);
+photoRestaurantRouter.post('/', PhotoValidation.createValidationDataRestaurant, PhotoRestaurantController.create);
 photoRestaurantRouter.delete('/:id', PhotoRestaurantController.delete);
 
 export default photoRestaurantRouter;

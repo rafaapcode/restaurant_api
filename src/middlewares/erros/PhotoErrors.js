@@ -43,7 +43,7 @@ class PhotoValidation {
           message: [
             'Url it is required.',
             'filename it is required',
-            'productPhotoId is is required',
+            'restaurantPhotoId is is required',
           ],
         },
       );

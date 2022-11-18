@@ -3,7 +3,7 @@ import joi from 'joi';
 class PhotoRestaurantValidations {
   fotoRestaurantBody(data) {
     const schema = joi.object({
-      url: joi.string().uri().required(),
+      url: joi.string().required(),
       filename: joi.string().required(),
       restaurantPhotoId: joi.string().uuid().required(),
     });
