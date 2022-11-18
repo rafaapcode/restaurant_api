@@ -25,3 +25,15 @@
 - Aprendi muito sobre o prisma e principalmente sobre como criar relacionamentos com ele.
 - Aprendi para que serve e como usar o Husky
 - Também aprendi mais a fundo sobre o JOI ( Validador de Schema )
+
+## Como usar a API
+- Clone ou faça o download do repositório.
+- Execute o seguinte comando para instalar as dependências ``` npm i ```
+- Crie o arquivo .env
+  - Dentro dele você irá colocar as seguintes informações :
+    ```
+      PORT=3000
+
+      DATABASE_URL="mysql://youruser:yourpassword@hot:port/DBNAME"
+    ```
+- Depois dessas configurações só executar o comando : ``` npm start ```
