@@ -26,12 +26,6 @@ export default class PhotoProduct {
     try {
       const { url, filename, productPhotoId } = body;
 
-      const photo = await prisma.foto_product.findUnique({ where: { filename } });
-
-      if (photo) {
-        return { status: false, statusCode: 400, message: 'Photo already exists.' };
-      }
-
       const { id } = await prisma.foto_product.create({
         data: { url, filename, productPhotoId },
       });

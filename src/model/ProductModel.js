@@ -17,12 +17,7 @@ export default class Product {
             },
           },
           promo: true,
-          photo_product: {
-            select: {
-              filename: true,
-              url: true,
-            },
-          },
+          photo_product: true,
         },
       });
 

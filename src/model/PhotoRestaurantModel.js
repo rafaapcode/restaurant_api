@@ -24,23 +24,17 @@ export default class PhotoRestaurant {
 
   static async create(body) {
     try {
-      const { url, filename, productPhotoId } = body;
-
-      const photo = await prisma.foto_restaurant.findUnique({ where: { filename } });
-
-      if (photo) {
-        return { status: false, statusCode: 400, message: 'Photo already exists.' };
-      }
+      const { url, filename, restaurantPhotoId } = body;
 
       const { id } = await prisma.foto_restaurant.create({
-        data: { url, filename, productPhotoId },
+        data: { url, filename, restaurantPhotoId },
       });
 
       return {
         status: true,
         statusCode: 201,
         message: [
-          `Photo added to product ${productPhotoId}`,
+          `Photo added to restaurant ${restaurantPhotoId}`,
           `Photo ID: ${id}`,
         ],
       };
