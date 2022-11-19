@@ -8,6 +8,7 @@ export default class Category {
         include: {
           product: {
             select: {
+              id: true,
               name: true,
             },
           },
