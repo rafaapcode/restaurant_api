@@ -1,0 +1,1145 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restaurant",
+    "description": "Restaurant Magement",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "paths": {
+    "/restaurant": {
+      "post": {
+        "description": "Criação de um restaurante",
+        "tags": [
+          "Restaurant"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "hours": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Restaurante 6",
+                  "address": "Rua Zézinho ...",
+                  "hours": "Funciona das 4 as 8 de segunda a sexta"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Restaurante já existe"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "201": {
+            "description": "Restaurante criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Restaurant created"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Retorna um array com todos os restaurantes",
+        "tags": [
+          "Restaurant"
+        ],
+        "responses": {
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna todos os restaurantes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "address": {
+                      "type": "string"
+                    },
+                    "hour": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "restaurant": [
+                      {
+                        "id": "f052bc56-df17544095c2",
+                        "name": "Restaurante do Zé",
+                        "address": "Rua das curvas",
+                        "hour": "De segunda a domingo das 17h as 23h"
+                      },
+                      {
+                        "id": "f052b4409",
+                        "name": "Restaurante de Esquina",
+                        "address": "Rua das Carnes",
+                        "hour": "De segunda a sexta das 18h as 00h"
+                      },
+                      {
+                        "id": "544095c2",
+                        "name": "Restaurante da Maria",
+                        "address": "Rua das Carnes",
+                        "hour": "De seguda a quarta das 12h as 23h"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurant/{id}": {
+      "get": {
+        "description": "Retorna somente o restaurante buscado pelo ID",
+        "tags": [
+          "Restaurant"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para buscar um restaurante",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Restaurante não encontrado"
+          },
+          "200": {
+            "description": "Retorna um restaurante",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "address": {
+                      "type": "string"
+                    },
+                    "hour": {
+                      "type": "string"
+                    },
+                    "photo_restaurant": {
+                      "type": "array"
+                    },
+                    "product": {
+                      "type": "array"
+                    }
+                  },
+                  "example": {
+                    "id": "37-df17544095c2",
+                    "name": "Restaurante do Zé",
+                    "address": "Rua Antonio",
+                    "hour": "De sexta a sabado das 17h as 23h",
+                    "photo_restaurant": [],
+                    "product": [
+                      {
+                        "name": "Sushi de Salmão Grelhado",
+                        "price": 16,
+                        "promotion": false,
+                        "category": {
+                          "name": "Peixes"
+                        },
+                        "promo": null,
+                        "photo_product": []
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Atualiza o restaurante especificado pelo ID",
+        "tags": [
+          "Restaurant"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para atualizar um restaurante",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "hour": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Novo nome",
+                  "address": "Novo endereço"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Restaurante não encontrado"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna um restaurante",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Restaurant updated with successfull!!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Exclui o restaurante desejado",
+        "tags": [
+          "Restaurant"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para excluir um restaurante",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Restaurante não encontrado"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna uma mensagem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Restaurant deleted with successfull !!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/category": {
+      "post": {
+        "description": "Criação de uma categoria",
+        "tags": [
+          "Category"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Doces"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Categoria já existe"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "201": {
+            "description": "Categoria criada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Category Created"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/category/{id}": {
+      "get": {
+        "description": "Retorna somente a categoria buscada pelo nome",
+        "tags": [
+          "Category"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "O nome que será usado para buscar a categoria",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Categoria não encontrado"
+          },
+          "200": {
+            "description": "Retorna uma categoria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "product": {
+                      "type": "array"
+                    }
+                  },
+                  "example": {
+                    "data": {
+                      "id": "36d43d0e-3b799bf",
+                      "name": "Doces",
+                      "product": [
+                        {
+                          "name": "Brigadeiro"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Excluir uma categoria pelo ID",
+        "tags": [
+          "Category"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para excluir uma categoria",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Categoria não encontrado"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna uma mensagem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Category deleted with successfull !!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "post": {
+        "description": "Criação de um Produto",
+        "tags": [
+          "Product"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "categoryId": {
+                    "type": "string"
+                  },
+                  "restaurantId": {
+                    "type": "string"
+                  },
+                  "promotion": {
+                    "type": "boolean"
+                  }
+                },
+                "example": {
+                  "name": "Sushi de Ceviche",
+                  "price": 20,
+                  "categoryId": "b162-157263b799bf",
+                  "restaurantId": "f37-df17544095c2",
+                  "promotion": true
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Produto já existe"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "201": {
+            "description": "Produto criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Product Created with ID: 42b-6e41acfba98c"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "description": "Retorna somente o produto buscado pelo ID",
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para buscar o produto",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Produto não encontrado"
+          },
+          "200": {
+            "description": "Retorna um produto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "idProduct": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "promotion": {
+                      "type": "boolean"
+                    },
+                    "category": {
+                      "type": "object"
+                    },
+                    "restaurant": {
+                      "type": "object"
+                    }
+                  },
+                  "example": {
+                    "data": {
+                      "idProduct": "d8954835-0ddb-4d33-b42b-6e41acfba98c",
+                      "name": "Sushi de Ceviche",
+                      "price": 20,
+                      "promotion": false,
+                      "category": {
+                        "name": "Peixes"
+                      },
+                      "restaurant": {
+                        "name": "Restaurante do Zé"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Atualiza o produto especificado pelo ID",
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para atualizar um produto",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "promotion": {
+                    "type": "boolean"
+                  }
+                },
+                "example": {
+                  "name": "Novo nome",
+                  "promotion": true
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Produto não encontrado"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna um produto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Product Created with ID: b42b-6e41acfba98c"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Excluir um produto pelo ID",
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para excluir um produto",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Produto não encontrado"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna uma mensagem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Product deleted with successfull !!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/promotion": {
+      "post": {
+        "description": "Criação de uma promoção",
+        "tags": [
+          "Promotion"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "newPrice": {
+                    "type": "number"
+                  },
+                  "hours": {
+                    "type": "string"
+                  },
+                  "productId": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "newPrice": 10,
+                  "description": "Sushi por 10 reais",
+                  "hours": "Somente as sextas",
+                  "productId": "d8954835-0ddb-4d3"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Promoção já existe"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "201": {
+            "description": "Promoção criada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "array"
+                    }
+                  },
+                  "example": {
+                    "message": [
+                      "Promotion add to  product: d8954835-0ddb-4d33-b42b-6e41acfba98c",
+                      "Promotion created with ID: 3 "
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/promotion/{id}": {
+      "put": {
+        "description": "Atualiza a promoção especificado pelo ID",
+        "tags": [
+          "Promotion"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para atualizar uma promoção",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "newPrice": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "hours": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "newPrice": 10
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Promoção não encontrada"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna uma promoção",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Promotion updated with Success."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Excluir uma promoção pelo ID",
+        "tags": [
+          "Promotion"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para excluir uma promoção",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Promoção não encontrada"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna uma mensagem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Promotion deleted with successfull !!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/photo-product": {
+      "post": {
+        "description": "Criação de uma foto para um produto",
+        "tags": [
+          "Photo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "url": {
+                    "type": "number"
+                  },
+                  "filename": {
+                    "type": "string"
+                  },
+                  "productPhotoId": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "url": "https://teste1234.com",
+                  "filename": "produto2.png",
+                  "productPhotoId": "d8954835-0ddb-4d33-b4ba98c"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Erro interno"
+          },
+          "201": {
+            "description": "Foto adicionada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "array"
+                    }
+                  },
+                  "example": {
+                    "message": [
+                      "Photo added to product d33-b42b-6e41acfba98c",
+                      "Photo ID: 3"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/photo-product/{id}": {
+      "put": {
+        "description": "Atualiza a foto especificado pelo ID",
+        "tags": [
+          "Photo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para atualizar uma foto",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "url": {
+                    "type": "number"
+                  },
+                  "filename": {
+                    "type": "string"
+                  },
+                  "productPhotoId": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "filename": "new filename"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Foto não encontrada"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna uma foto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Photo updated with success"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Excluir uma foto pelo ID",
+        "tags": [
+          "Photo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para excluir uma foto",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Foto não encontrada"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna uma mensagem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Photo deleted with successfull !!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/photo-restaurant": {
+      "post": {
+        "description": "Criação de uma foto para um restaurante",
+        "tags": [
+          "Photo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "url": {
+                    "type": "number"
+                  },
+                  "filename": {
+                    "type": "string"
+                  },
+                  "productPhotoId": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "url": "https://teste1234.com",
+                  "filename": "produto2.png",
+                  "restaurantPhotoId": "d8954835-0ddb-4d33-b4ba98c"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Erro interno"
+          },
+          "201": {
+            "description": "Foto adicionada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "array"
+                    }
+                  },
+                  "example": {
+                    "message": [
+                      "Photo added to restaurant d33-b42b-6e41acfba98c",
+                      "Photo ID: 3"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/photo-restaurant/{id}": {
+      "put": {
+        "description": "Atualiza a foto especificado pelo ID",
+        "tags": [
+          "Photo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para atualizar uma foto",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "url": {
+                    "type": "number"
+                  },
+                  "filename": {
+                    "type": "string"
+                  },
+                  "productPhotoId": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "filename": "new filename"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Foto não encontrada"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna uma foto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Photo updated with success"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Excluir uma foto pelo ID",
+        "tags": [
+          "Photo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "O id que será usado para excluir uma foto",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Foto não encontrada"
+          },
+          "500": {
+            "description": "Erro interno"
+          },
+          "200": {
+            "description": "Retorna uma mensagem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Photo deleted with successfull !!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
