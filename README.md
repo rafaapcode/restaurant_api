@@ -38,4 +38,4 @@
     ```
 - Depois dessas configurações só executar o comando : ``` npm start ```
 
-- Para acessar a documentação clique no link : ``` localhost:3000/docs ```
+- Para acessar a documentação use o link : ``` localhost:3000/docs ```
